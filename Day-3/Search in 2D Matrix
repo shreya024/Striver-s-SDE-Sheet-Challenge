@@ -1,0 +1,22 @@
+#include <bits/stdc++.h> 
+#include <vector>
+
+bool findTargetInMatrix(vector < vector < int >> & mat, int m, int n, int target) {
+    int row=mat.size();
+    int col=mat[0].size();
+    
+    int elements=row*col;
+    int low=0;
+    int high=elements-1;
+    while(low<=high){
+        int mid=(high+low)/2;
+        int element=mat[mid/col][mid%col];
+        if(element==target)
+            return true;
+        if(element<target)
+            low=mid+1;
+        else
+            high=mid-1;
+    }
+    return false;
+}
