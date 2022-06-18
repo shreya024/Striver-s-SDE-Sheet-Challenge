@@ -16,3 +16,30 @@ int subarraysXor(vector<int> &arr, int x)
     }
     return count;
 }
+
+//Method 2 ---Optimal T.C=O(n)
+
+#include <bits/stdc++.h> 
+int subarraysXor(vector<int> &arr, int x)
+{
+    int n=arr.size();
+    int count=0;
+    
+    //Calculating Prefix XOR
+    unordered_map<int,int> xork;
+    long long k=0;
+    for(int i=0;i<n;i++){
+        k^=arr[i];
+        if(k==x){
+            count++;
+        }
+        if(xork.find(k^x)!=xork.end()){
+            count+=xork[k^x];
+        }
+        
+        xork[k]++;
+        
+    }
+    
+    return count;
+}
