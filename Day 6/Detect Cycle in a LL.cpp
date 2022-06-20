@@ -15,3 +15,23 @@ bool detectCycle(Node *head)
     
     return false;
 }
+
+
+//Method 2---Slow and Fast Pointer -> T.C=O(N) & S.C=O(1)
+
+bool detectCycle(Node *head)
+{
+	Node *slow=head;
+    Node *fast=head->next;
+    
+    while(slow!=NULL && fast!=NULL){
+        if(slow==fast)
+            return true;
+        slow=slow->next;
+        fast=fast->next;
+        if(fast!=NULL)
+            fast=fast->next;
+    }
+    
+    return false;
+}
