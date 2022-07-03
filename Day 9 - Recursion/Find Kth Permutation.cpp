@@ -30,3 +30,35 @@ string kthPermutation(int n, int k) {
     string ans=res[index];
     return ans;
 }
+
+//Method 2: Using mathematics -> T.C=O(N^2)
+
+string kthPermutation(int n, int k) {
+    //Step 1: Computing (n-1) factorial and storing all the numbers
+    
+    int fact=1;
+    vector<int> numbers;
+    for(int i=1;i<n;i++){
+        fact=fact*i;
+        numbers.push_back(i);
+    }
+    numbers.push_back(n);
+    
+    string ans="";//for the actual answer
+    k--;//logic is based on 0-based indexing
+    
+    //Step 2 : Computing each number
+    while(true){
+        ans+=to_string(numbers[k/fact]);//actual
+        numbers.erase(numbers.begin()+k/fact);//deleting the already selected one
+        if(numbers.size()==0)
+            break;//till list is empty
+        
+        //Updating values
+        k=k%fact;
+        fact=fact/numbers.size();
+    }
+    
+    return ans;
+    
+}
